@@ -1,0 +1,25 @@
+This file is part of MXE. See LICENSE.md for licensing information.
+
+Contains ad hoc patches for cross building.
+
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Sebastian Vater <cdgs.basty@googlemail.com>
+Date: Thu, 31 Oct 2024 04:08:35 +0100
+Subject: [PATCH 8/8] Compile fix for lua5.4 compatibility
+
+diff --git a/src/pcall.cpp b/src/pcall.cpp
+index 7a5d0c20..407c0ec5 100755
+--- a/src/pcall.cpp
++++ b/src/pcall.cpp
+@@ -48,7 +48,11 @@ namespace luabind { namespace detail
+ 	int resume_impl(lua_State *L, int nargs, int)
+ 	{
+ #if LUA_VERSION_NUM >= 502
++#if LUA_VERSION_NUM >= 504
++		int res = lua_resume(L, NULL, nargs, &nargs);
++#else
+ 		int res = lua_resume(L, NULL, nargs);
++#endif
+ 		return (res == LUA_YIELD) ? 0 : res;
+ #else
+ #if LUA_VERSION_NUM >= 501
