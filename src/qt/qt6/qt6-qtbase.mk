@@ -5,13 +5,13 @@ PKG             := qt6-$(PKG_BASENAME)
 $(PKG)_WEBSITE  := https://www.qt.io/
 $(PKG)_DESCR    := Qt6
 $(PKG)_IGNORE   :=
-$(PKG)_VERSION  := 6.11.1
-$(PKG)_CHECKSUM := d9594a31228aa23ad6b531719a29b45f0f3989fe6c136d45767ea179f233c1ac
+$(PKG)_VERSION  := 6.11.2
+$(PKG)_CHECKSUM := 5b2e00eccaf5a4d8c14134ffa0ea8dfd0a35ae1ffc7f8d87fa4305a1ed23cf22
 $(PKG)_SUBDIR   := $(PKG_BASENAME)-everywhere-src-$($(PKG)_VERSION)
 $(PKG)_FILE     := $(PKG_BASENAME)-everywhere-src-$($(PKG)_VERSION).tar.xz
 $(PKG)_URL      := https://download.qt.io/archive/qt/6.11/$($(PKG)_VERSION)/submodules/$($(PKG)_FILE)
 $(PKG)_TARGETS  := $(BUILD) $(MXE_TARGETS)
-$(PKG)_DEPS     := cc freetype harfbuzz jpeg libpng mesa mariadb-connector-c openssl pcre2 sqlite zlib zstd $(BUILD)~$(PKG) \
+$(PKG)_DEPS     := cc dbus freetype harfbuzz jpeg libpng mesa mariadb-connector-c openssl pcre2 sqlite zlib zstd $(BUILD)~$(PKG) \
                    $(if $(findstring shared,$(MXE_TARGETS)), icu4c)
 $(PKG)_DEPS_$(BUILD) :=
 $(PKG)_OO_DEPS_$(BUILD) := ninja
@@ -41,7 +41,7 @@ define $(PKG)_BUILD
         -DQT_BUILD_TESTS=OFF \
         -DBUILD_WITH_PCH=OFF \
         -DFEATURE_accessibility=ON \
-        -DFEATURE_dbus=OFF \
+        -DFEATURE_dbus=ON \
         -DFEATURE_fontconfig=OFF \
         -DFEATURE_system_freetype=ON \
         -DFEATURE_glib=OFF \
