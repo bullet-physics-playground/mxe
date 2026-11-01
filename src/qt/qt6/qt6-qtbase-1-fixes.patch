@@ -12,7 +12,7 @@ diff --git a/cmake/QtBaseHelpers.cmake b/cmake/QtBaseHelpers.cmake
 index 1111111..2222222 100644
 --- a/cmake/QtBaseHelpers.cmake
 +++ b/cmake/QtBaseHelpers.cmake
-@@ -276,7 +276,9 @@ macro(qt_internal_qtbase_build_repo)
+@@ -283,7 +283,9 @@ macro(qt_internal_qtbase_build_repo)
          qt_internal_set_up_config_optimizations_like_in_qmake()
  
          ## Setup documentation
@@ -39,7 +39,7 @@ index 1111111..2222222 100644
              set(writableLib OpenSSL::Crypto)
          endif()
 -        set_property(TARGET ${writableLib} APPEND PROPERTY INTERFACE_LINK_LIBRARIES ws2_32 crypt32)
-+        set_property(TARGET ${writableLib} APPEND PROPERTY INTERFACE_LINK_LIBRARIES -lssl -lcrypto -lz -lws2_32 -lgdi32 -lcrypt32)
++        set_property(TARGET ${writableLib} APPEND PROPERTY INTERFACE_LINK_LIBRARIES -lssl -lcrypto -lbcrypt -lz -lws2_32 -lgdi32 -lcrypt32)
          unset(libType)
          unset(writableLib)
      endif()
